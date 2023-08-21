@@ -1,9 +1,13 @@
-import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from 'recharts';
-import { Paper } from '@mui/material';
+import React, { useState } from 'react';
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+import { Box, Paper } from '@mui/material';
+import CustomLegend from './CustomLegend';
 
 function ChartComponent({ data }) {
-    // Transformez les données pour le format requis par Recharts
+    const [activeTiers, setActiveTiers] = useState([
+        "HERO", "VETERAN", "LEGEND", "GOAT", "RESEARCHER", "EXPLORER", "ADVENTURER"
+    ]);
+
     const transformedData = data.reduce((acc, current) => {
         const existingIndex = acc.findIndex(item => item.block_height === current.block_height);
 
@@ -20,27 +24,33 @@ function ChartComponent({ data }) {
     }, []);
 
     return (
-        <Paper style={{ padding: '1rem' }}>
-            <LineChart
-                width={800}
-                height={400}
-                data={transformedData}
-                margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-            >
-                <XAxis dataKey="block_height" />
-                <YAxis />
-                <Tooltip />
-                <CartesianGrid stroke="#f5f5f5" />
-                <Legend />
-                <Line type="monotone" dataKey="HERO" stroke="#ff7300" />
-                <Line type="monotone" dataKey="VETERAN" stroke="#387908" />
-                <Line type="monotone" dataKey="LEGEND" stroke="#f51167" />
-                <Line type="monotone" dataKey="GOAT" stroke="#0012f4" />
-                <Line type="monotone" dataKey="RESEARCHER" stroke="#650d1b" />
-                <Line type="monotone" dataKey="EXPLORER" stroke="#0d656e" />
-                <Line type="monotone" dataKey="ADVENTURER" stroke="#6e0d44" />
-            </LineChart>
-        </Paper>
+        <Box mt={3}>
+            <Paper elevation={5} style={{ background: '#f5f5f5' }}>
+                <Box p={3}>
+                    <CustomLegend activeTiers={activeTiers} setActiveTiers={setActiveTiers} />
+                    <Box mt={4} display="flex" justifyContent="center">
+                        <LineChart
+                            width={800}
+                            height={400}
+                            data={transformedData}
+                            margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+                        >
+                            <XAxis dataKey="block_height" />
+                            <YAxis />
+                            <Tooltip />
+                            <CartesianGrid stroke="#aaa" strokeDasharray="3 3" />
+                            {activeTiers.includes("HERO") && <Line type="monotone" dataKey="HERO" stroke="#ff7300" />}
+                            {activeTiers.includes("VETERAN") && <Line type="monotone" dataKey="VETERAN" stroke="#387908" />}
+                            {activeTiers.includes("LEGEND") && <Line type="monotone" dataKey="LEGEND" stroke="#f51167" />}
+                            {activeTiers.includes("GOAT") && <Line type="monotone" dataKey="GOAT" stroke="#0012f4" />}
+                            {activeTiers.includes("RESEARCHER") && <Line type="monotone" dataKey="RESEARCHER" stroke="#650d1b" />}
+                            {activeTiers.includes("EXPLORER") && <Line type="monotone" dataKey="EXPLORER" stroke="#0d656e" />}
+                            {activeTiers.includes("ADVENTURER") && <Line type="monotone" dataKey="ADVENTURER" stroke="#6e0d44" />}
+                        </LineChart>
+                    </Box>
+                </Box>
+            </Paper>
+        </Box>
     );
 }
 

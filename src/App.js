@@ -1,9 +1,9 @@
 import React from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Box } from '@mui/material';
 import ChartComponent from './ChartComponent';
+// import './App.css';
 
 function App() {
-  // Insérez vos données ici
   const data = [
     { "block_height": "17595510", "tier_name": "HERO", "value": 1676 },
     { "block_height": "17595510", "tier_name": "VETERAN", "value": 818 },
@@ -103,12 +103,33 @@ function App() {
   ];
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Plutus Chart
-      </Typography>
-      <ChartComponent data={data} />
-    </Container>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh"
+      bgcolor="#f4f6f8"
+    >
+      <Container maxWidth="lg">
+        <Typography
+          variant="h3"
+          gutterBottom
+          align="center"
+          style={{
+            padding: '2rem 0',
+            textShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)',
+            fontSize: '2.5rem',
+            color: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+            fontWeight: 'bold',
+            letterSpacing: '1px'
+          }}>
+          Plutus tiers chart
+        </Typography>
+
+        <ChartComponent data={data} />
+      </Container>
+    </Box>
   );
 }
 
