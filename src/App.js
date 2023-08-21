@@ -7,7 +7,7 @@ function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const apiUrl = `http://quentingosset.com:6060/api/statistics`;
+    const apiUrl = `https://plutus.thomasott.fr/api/statistics`;
 
     fetch(apiUrl)
       .then(response => response.json())
