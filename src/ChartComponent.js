@@ -8,14 +8,18 @@ function ChartComponent({ data }) {
         "HERO", "VETERAN", "LEGEND", "GOAT", "RESEARCHER", "EXPLORER", "ADVENTURER"
     ]);
 
+    data.sort((a, b) => a.block_height - b.block_height);
+
     const transformedData = data.reduce((acc, current) => {
-        const existingIndex = acc.findIndex(item => item.block_height === current.block_height);
+        const convertedDate = new Intl.DateTimeFormat('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(current.signed_at));
+
+        const existingIndex = acc.findIndex(item => item.signed_at === convertedDate);
 
         if (existingIndex > -1) {
             acc[existingIndex][current.tier_name] = current.value;
         } else {
             acc.push({
-                block_height: current.block_height,
+                signed_at: convertedDate,
                 [current.tier_name]: current.value
             });
         }
@@ -35,7 +39,7 @@ function ChartComponent({ data }) {
                             data={transformedData}
                             margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
                         >
-                            <XAxis dataKey="block_height" />
+                            <XAxis dataKey="signed_at" />
                             <YAxis />
                             <Tooltip />
                             <CartesianGrid stroke="#aaa" strokeDasharray="3 3" />
