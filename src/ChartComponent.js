@@ -10,17 +10,49 @@ function ChartComponent({ data, visiblePoints }) {
 
     const [startIndex, setStartIndex] = useState(17 - 14);
 
+    const [isDragging, setIsDragging] = useState(false);
+    const [lastDragX, setLastDragX] = useState(null);
+
     const handleWheel = (event) => {
-        if (event.deltaX > 0) {
+        const moveAmount = event.deltaX;
+        if (moveAmount > 0) {
             if (startIndex + visiblePoints < data.length) {
-                setStartIndex(startIndex + 1);
+                setStartIndex(prevIndex => prevIndex + 1);
             }
         } else {
             if (startIndex > 0) {
-                setStartIndex(startIndex - 1);
+                setStartIndex(prevIndex => prevIndex - 1);
             }
         }
     }
+
+    const handleMouseDown = (event) => {
+        setIsDragging(true);
+        setLastDragX(event.clientX);
+    }
+
+    const handleMouseMove = (event) => {
+        if (isDragging) {
+            const deltaX = lastDragX - event.clientX;
+            const moveBy = Math.round(deltaX / 100);
+            if (moveBy !== 0) {
+                setStartIndex(prevIndex => Math.min(Math.max(0, prevIndex + moveBy), data.length - visiblePoints));
+                setLastDragX(event.clientX);
+            }
+        }
+    }
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    }
+
+    useEffect(() => {
+        window.addEventListener('mouseup', handleMouseUp);
+        return () => {
+            window.removeEventListener('mouseup', handleMouseUp);
+        }
+    }, []);
+
     useEffect(() => {
         if (data.length > visiblePoints) {
             setStartIndex(data.length - visiblePoints);
@@ -32,7 +64,8 @@ function ChartComponent({ data, visiblePoints }) {
             <Paper elevation={5} style={{ background: '#f5f5f5' }}>
                 <Box p={3}>
                     <CustomLegend activeTiers={activeTiers} setActiveTiers={setActiveTiers} />
-                    <Box mt={4} display="flex" justifyContent="center">
+                    <Box mt={4} display="flex" justifyContent="center" onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}>
                         <LineChart
                             width={800}
                             height={400}
