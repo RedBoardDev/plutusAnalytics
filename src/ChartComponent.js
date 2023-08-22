@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { Box, Paper } from '@mui/material';
 import CustomLegend from './CustomLegend';
 
-function ChartComponent({ data }) {
+function ChartComponent({ data, visiblePoints }) {
     const [activeTiers, setActiveTiers] = useState([
         "HERO", "VETERAN", "LEGEND", "GOAT", "RESEARCHER", "EXPLORER", "ADVENTURER"
     ]);
 
-    data.sort((a, b) => a.block_height - b.block_height);
+    const [startIndex, setStartIndex] = useState(17 - 14);
 
-    const transformedData = data.reduce((acc, current) => {
-        const convertedDate = new Intl.DateTimeFormat('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(current.signed_at));
-
-        const existingIndex = acc.findIndex(item => item.signed_at === convertedDate);
-
-        if (existingIndex > -1) {
-            acc[existingIndex][current.tier_name] = current.value;
+    const handleWheel = (event) => {
+        if (event.deltaX > 0) {
+            if (startIndex + visiblePoints < data.length) {
+                setStartIndex(startIndex + 1);
+            }
         } else {
-            acc.push({
-                signed_at: convertedDate,
-                [current.tier_name]: current.value
-            });
+            if (startIndex > 0) {
+                setStartIndex(startIndex - 1);
+            }
         }
-
-        return acc;
-    }, []);
+    }
+    useEffect(() => {
+        if (data.length > visiblePoints) {
+            setStartIndex(data.length - visiblePoints);
+        }
+    }, [data, visiblePoints]);
 
     return (
-        <Box mt={3}>
+        <Box mt={3} onWheel={handleWheel}>
             <Paper elevation={5} style={{ background: '#f5f5f5' }}>
                 <Box p={3}>
                     <CustomLegend activeTiers={activeTiers} setActiveTiers={setActiveTiers} />
@@ -36,7 +36,7 @@ function ChartComponent({ data }) {
                         <LineChart
                             width={800}
                             height={400}
-                            data={transformedData}
+                            data={data.slice(startIndex, startIndex + visiblePoints)}
                             margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
                         >
                             <XAxis dataKey="signed_at" />
