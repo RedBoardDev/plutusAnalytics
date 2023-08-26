@@ -16,7 +16,7 @@ function LastStats({ data }) {
     });
 
     return (
-        <Box mt={3}>
+        <Box mt={3} width={250}>
             <Paper elevation={5} style={{ background: '#f5f5f5' }}>
                 <Box p={3}>
                     <Typography variant="h6" gutterBottom textAlign='center' >

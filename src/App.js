@@ -4,12 +4,14 @@ import ChartComponent from './components/ChartComponent';
 import useTransformedData from './components/useTransformedData';
 import ErrorBanner from './components/ErrorBanner';
 import LastStats from './components/LastStats';
+import TiersChart from './components/TiersChart';
 import './App.css';
 
 function App() {
     const [visiblePoints] = useState(14);
     const [apiData, setApiData] = useState([]);
     const [tiersAggregatedData] = useTransformedData(apiData.tiers_aggregated || [], visiblePoints);
+    const [stakingData, setStakingData] = useState([]);
     const [apiError, setApiError] = useState(false);
 
     useEffect(() => {
@@ -24,9 +26,10 @@ function App() {
         Promise.race([fetch(apiUrl), fetchTimeout])
             .then(response => response.json())
             .then(fetchedData => {
-                console.log(fetchedData);
                 if (fetchedData.success === true) {
+                    console.log(fetchedData);
                     setApiData(fetchedData);
+                    setStakingData(fetchedData?.staking || []);
                 } else {
                     setApiError(true);
                 }
@@ -64,8 +67,9 @@ function App() {
                     Plutus tiers chart
                 </Typography>
                 <ChartComponent data={tiersAggregatedData} visiblePoints={visiblePoints} />
-                <Box mt={3} width={250}>
+                <Box mt={0} display="flex">
                     <LastStats data={tiersAggregatedData} />
+                    <TiersChart style={{ flex: 1 }} data={apiData.tiers} />
                 </Box>
             </Container>
         </Box>
