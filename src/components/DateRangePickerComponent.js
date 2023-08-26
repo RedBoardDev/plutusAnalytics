@@ -1,21 +1,26 @@
+import { Box } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { Box } from '@mui/material';
 import dayjs from 'dayjs';
 
 function DateRangePickerComponent({ onDateRangeChange, availableDates }) {
-    const today = dayjs();
-    const yesterday = today.subtract(1, 'day');
-
-    const [startDate, setStartDate] = useState(yesterday);
-    const [endDate, setEndDate] = useState(today);
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
 
     useEffect(() => {
+        if (availableDates && availableDates.length >= 2) {
+            console.log(availableDates[availableDates.length - 1])
+            const today = dayjs(availableDates[availableDates.length - 1], 'DD/MM/YYYY').startOf('day');
+            const yesterday = dayjs(availableDates[availableDates.length - 2], 'DD/MM/YYYY').startOf('day');
+            setStartDate(yesterday);
+            setEndDate(today);
+        }
+
         if ((startDate && startDate.isValid()) && (endDate && endDate.isValid())) {
             onDateRangeChange(startDate.format('DD/MM/YYYY'), endDate.format('DD/MM/YYYY'));
         }
-    }, [startDate, endDate, onDateRangeChange]);
+    }, [startDate, endDate, onDateRangeChange, availableDates]);
 
     const handleStartDateChange = (date) => {
         setStartDate(date);

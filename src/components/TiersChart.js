@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Paper } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 function TiersChart({ data }) {
@@ -33,6 +33,9 @@ function TiersChart({ data }) {
         <Box p={3}>
             <Paper elevation={5} style={{ background: '#f5f5f5' }}>
                 <Box p={3}>
+                    <Typography variant='h6' align="center" gutterBottom>
+                        Staking per dynamic ajustement
+                    </Typography>
                     <Box mt={4} display="flex" justifyContent="center">
                         <BarChart
                             width={800}
@@ -50,6 +53,7 @@ function TiersChart({ data }) {
                                     dataKey={`DA ${index}`}
                                     stackId="a"
                                     fill={colors[index % colors.length]}
+                                    shape={<CustomRectangle />}
                                 />
                             ))}
                         </BarChart>
@@ -59,5 +63,22 @@ function TiersChart({ data }) {
         </Box>
     );
 }
+
+const CustomRectangle = (props) => {
+    const { x, y, width, height, fill } = props;
+
+    return (
+        <rect
+            x={x}
+            y={y}
+            width={width}
+            height={height}
+            fill={fill}
+            stroke={fill}
+            strokeWidth={2}
+            fillOpacity={0.8}
+        />
+    );
+};
 
 export default TiersChart;

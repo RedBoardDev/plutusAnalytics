@@ -5,6 +5,7 @@ import useTransformedData from './components/useTransformedData';
 import ErrorBanner from './components/ErrorBanner';
 import StatsComparator from './components/StatsComparator';
 import TiersChart from './components/TiersChart';
+import StackedChart from './components/StackedChart';
 import './App.css';
 
 function App() {
@@ -29,12 +30,18 @@ function App() {
                 if (fetchedData.success === true) {
                     console.log(fetchedData);
                     setApiData(fetchedData);
-                    setStakingData(fetchedData?.staking || []);
+
+                    const tmp = (fetchedData.staking || []).map(item => {
+                        item.signed_at = new Intl.DateTimeFormat('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(item.signed_at));
+                        return item;
+                    });
+                    setStakingData(tmp);
                 } else {
                     setApiError(true);
                 }
             })
             .catch(error => {
+                console.error(error)
                 setApiError(true);
             });
     }, []);
@@ -67,6 +74,7 @@ function App() {
                     Plutus tiers chart
                 </Typography>
                 <ChartComponent data={tiersAggregatedData} visiblePoints={visiblePoints} />
+                <StackedChart data={stakingData} />
                 <Box mt={0} display="flex">
                     <StatsComparator data={tiersAggregatedData} />
                     <TiersChart style={{ flex: 1 }} data={apiData.tiers} />

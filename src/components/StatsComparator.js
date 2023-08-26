@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
-import './statsComparator.css';
 import DateRangePickerComponent from './DateRangePickerComponent';
+import './statsComparator.css';
 
 function StatsComparator({ data }) {
     const [todayDate, setTodayDate] = useState(null);
@@ -34,7 +34,7 @@ function StatsComparator({ data }) {
         <Box mt={3} width={250}>
             <Paper elevation={5} style={{ background: '#f5f5f5' }}>
                 <Box p={3}>
-                    <Typography variant="h6" gutterBottom textAlign='center' >
+                    <Typography variant='h6' textAlign='center' gutterBottom>
                         Stats Comparator
                     </Typography>
                     <Box mt={2}>

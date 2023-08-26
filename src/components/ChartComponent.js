@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { Box, Paper, Typography } from '@mui/material';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Brush } from 'recharts';
-import { Box, Paper } from '@mui/material';
 import CustomLegend from './CustomLegend';
 
 function ChartComponent({ data }) {
@@ -12,10 +12,13 @@ function ChartComponent({ data }) {
         <Box mt={3}>
             <Paper elevation={5} style={{ background: '#f5f5f5' }}>
                 <Box p={3}>
+                    <Typography variant='h6' align="center" gutterBottom>
+                        Staking Tiers
+                    </Typography>
                     <CustomLegend activeTiers={activeTiers} setActiveTiers={setActiveTiers} />
                     <Box mt={4} display="flex" justifyContent="center">
                         <LineChart
-                            width={800}
+                            width={900}
                             height={400}
                             data={data}
                             margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
