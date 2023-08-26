@@ -2,26 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box } from '@mui/material';
 import ChartComponent from './ChartComponent';
 import useTransformedData from './useTransformedData';
+import ErrorBanner from './ErrorBanner';
 
 function App() {
     const [visiblePoints] = useState(14);
     const [rawData, setRawData] = useState([]);
     const [transformedData] = useTransformedData(rawData, visiblePoints);
+    const [apiError, setApiError] = useState(false);
 
     useEffect(() => {
         const apiUrl = `https://plutus.thomasott.fr/api/statistics`;
 
-        fetch(apiUrl)
+        const fetchTimeout = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject(new Error("Timeout: The request took too long"));
+            }, 10000);
+        });
+
+        Promise.race([fetch(apiUrl), fetchTimeout])
             .then(response => response.json())
             .then(fetchedData => {
                 if (fetchedData.success === true) {
                     setRawData(fetchedData.result || []);
+                } else {
+                    setApiError(true);
                 }
             })
             .catch(error => {
-                console.error("Erreur lors de la récupération des données:", error);
+                setApiError(true);
             });
-
     }, []);
 
     return (
@@ -49,6 +58,9 @@ function App() {
                     Plutus tiers chart
                 </Typography>
 
+                {apiError &&
+                    <ErrorBanner />
+                }
                 <ChartComponent data={transformedData} visiblePoints={visiblePoints} />
             </Container>
         </Box>

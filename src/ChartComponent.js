@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, Brush } from 'recharts';
-import { Box, Paper, button } from '@mui/material';
+import React, { useState } from 'react';
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Brush } from 'recharts';
+import { Box, Paper } from '@mui/material';
 import CustomLegend from './CustomLegend';
 
 function ChartComponent({ data }) {
