@@ -3,6 +3,8 @@ import { Container, Typography, Box } from '@mui/material';
 import ChartComponent from './components/ChartComponent';
 import useTransformedData from './components/useTransformedData';
 import ErrorBanner from './components/ErrorBanner';
+import LastStats from './components/LastStats';
+import './App.css';
 
 function App() {
     const [visiblePoints] = useState(14);
@@ -43,6 +45,9 @@ function App() {
             minHeight="100vh"
             bgcolor="#f4f6f8"
         >
+            {apiError &&
+                <ErrorBanner />
+            }
             <Container maxWidth="lg">
                 <Typography
                     variant="h3"
@@ -58,11 +63,10 @@ function App() {
                     }}>
                     Plutus tiers chart
                 </Typography>
-
-                {apiError &&
-                    <ErrorBanner />
-                }
                 <ChartComponent data={tiersAggregatedData} visiblePoints={visiblePoints} />
+                <Box mt={3} width={250}>
+                    <LastStats data={tiersAggregatedData} />
+                </Box>
             </Container>
         </Box>
     );
