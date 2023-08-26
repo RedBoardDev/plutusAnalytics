@@ -3,7 +3,7 @@ import { Container, Typography, Box } from '@mui/material';
 import ChartComponent from './components/ChartComponent';
 import useTransformedData from './components/useTransformedData';
 import ErrorBanner from './components/ErrorBanner';
-import LastStats from './components/LastStats';
+import StatsComparator from './components/StatsComparator';
 import TiersChart from './components/TiersChart';
 import './App.css';
 
@@ -68,7 +68,7 @@ function App() {
                 </Typography>
                 <ChartComponent data={tiersAggregatedData} visiblePoints={visiblePoints} />
                 <Box mt={0} display="flex">
-                    <LastStats data={tiersAggregatedData} />
+                    <StatsComparator data={tiersAggregatedData} />
                     <TiersChart style={{ flex: 1 }} data={apiData.tiers} />
                 </Box>
             </Container>

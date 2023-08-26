@@ -9,7 +9,6 @@ function TiersChart({ data }) {
     ];
     const lastBlockHeight = data ? data[data.length - 1]?.block_height : 0;
     const lastData = data?.filter(item => item.block_height === lastBlockHeight) || [];
-    console.log("lastData", lastData);
 
     const activeTiers = {};
     lastData.forEach(element => {
@@ -21,7 +20,6 @@ function TiersChart({ data }) {
         }
         activeTiers[tierName][tierValue] = parseInt(element.value);
     });
-    console.log("activeTiers", activeTiers);
     const barData = Object.keys(activeTiers).map((tierName, index) => {
         const tierValues = activeTiers[tierName];
         const barEntry = { name: tierName };
