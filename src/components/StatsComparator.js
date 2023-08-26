@@ -11,19 +11,23 @@ function StatsComparator({ data }) {
     const [differences, setDifferences] = useState({});
 
     useEffect(() => {
-        setTodayStats(data.find(item => item.signed_at === yesterdayDate) || {});
-        setYesterdayStats(data.find(item => item.signed_at === todayDate) || {});
+        const newTodayStats = data.find(item => item.signed_at === yesterdayDate) || {};
+        const newYesterdayStats = data.find(item => item.signed_at === todayDate) || {};
 
         const newDifferences = {};
-        Object.keys(todayStats).forEach(key => {
+        Object.keys(newTodayStats).forEach(key => {
             if (key !== 'signed_at' && key !== 'block_height') {
-                const todayValue = parseInt(todayStats[key]) || 0;
-                const yesterdayValue = parseInt(yesterdayStats[key]) || 0;
+                const todayValue = parseInt(newTodayStats[key]) || 0;
+                const yesterdayValue = parseInt(newYesterdayStats[key]) || 0;
                 newDifferences[key] = todayValue - yesterdayValue;
             }
         });
         setDifferences(newDifferences);
-    }, [data, todayStats, yesterdayStats, yesterdayDate, todayDate])
+
+        setTodayStats(newTodayStats);
+        setYesterdayStats(newYesterdayStats);
+    }, [data, yesterdayDate, todayDate])
+
 
     const handleDateRangeChange = (newtodayDate, newyesterdayDate) => {
         setTodayDate(newtodayDate);
@@ -57,6 +61,7 @@ function StatsComparator({ data }) {
                         })}
                     </Box>
                 </Box>
+                {console.log("test")}
                 <DateRangePickerComponent onDateRangeChange={handleDateRangeChange} availableDates={data?.map(item => item.signed_at) || []} />
             </Paper>
         </Box>

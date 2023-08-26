@@ -3,8 +3,6 @@ import { Box, Paper, Typography } from '@mui/material';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 function StackedChart({ data }) {
-    console.log(data);
-
     return (
         <Box mt={3}>
             <Paper elevation={5} style={{ background: '#f5f5f5' }}>

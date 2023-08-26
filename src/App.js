@@ -28,7 +28,6 @@ function App() {
             .then(response => response.json())
             .then(fetchedData => {
                 if (fetchedData.success === true) {
-                    console.log(fetchedData);
                     setApiData(fetchedData);
 
                     const tmp = (fetchedData.staking || []).map(item => {
@@ -76,6 +75,7 @@ function App() {
                 <ChartComponent data={tiersAggregatedData} visiblePoints={visiblePoints} />
                 <StackedChart data={stakingData} />
                 <Box mt={0} display="flex">
+                    {console.log("test1")}
                     <StatsComparator data={tiersAggregatedData} />
                     <TiersChart style={{ flex: 1 }} data={apiData.tiers} />
                 </Box>
