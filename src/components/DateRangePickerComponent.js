@@ -9,35 +9,32 @@ function DateRangePickerComponent({ onDateRangeChange, availableDates }) {
     const [endDate, setEndDate] = useState(null);
 
     useEffect(() => {
-        if (availableDates && availableDates.length >= 2) {
+        if (availableDates && availableDates.length >= 2 && !startDate && !endDate) {
             const today = dayjs(availableDates[availableDates.length - 1], 'DD/MM/YYYY').startOf('day');
             const yesterday = dayjs(availableDates[availableDates.length - 2], 'DD/MM/YYYY').startOf('day');
             setStartDate(yesterday);
             setEndDate(today);
         }
-    }, [availableDates]);
-
-    const handleStartDateChange = (date) => {
-        if (!date.isSame(startDate, 'day')) {
-            setStartDate(date);
-        }
-    };
-
-    const handleEndDateChange = (date) => {
-        if (!date.isSame(endDate, 'day')) {
-            setEndDate(date);
-        }
-    };
-    const shouldDisableDate = (date) => {
-        const formattedDate = date.format('DD/MM/YYYY');
-        return !availableDates.includes(formattedDate);
-    };
+    }, [availableDates, endDate, startDate]);
 
     useEffect(() => {
         if (startDate && endDate) {
             onDateRangeChange(startDate.format('DD/MM/YYYY'), endDate.format('DD/MM/YYYY'));
         }
     }, [startDate, endDate, onDateRangeChange]);
+
+    const handleStartDateChange = (date) => {
+        setStartDate(date);
+    };
+
+    const handleEndDateChange = (date) => {
+        setEndDate(date);
+    };
+
+    const shouldDisableDate = (date) => {
+        const formattedDate = date.format('DD/MM/YYYY');
+        return !availableDates.includes(formattedDate);
+    };
 
     return (
         <Box p={3} marginTop={-3}>
