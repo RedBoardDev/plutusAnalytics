@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box } from '@mui/material';
-import ChartComponent from './ChartComponent';
-import useTransformedData from './useTransformedData';
-import ErrorBanner from './ErrorBanner';
+import ChartComponent from './components/ChartComponent';
+import useTransformedData from './components/useTransformedData';
+import ErrorBanner from './components/ErrorBanner';
 
 function App() {
     const [visiblePoints] = useState(14);
-    const [rawData, setRawData] = useState([]);
-    const [transformedData] = useTransformedData(rawData, visiblePoints);
+    const [apiData, setApiData] = useState([]);
+    const [tiersAggregatedData] = useTransformedData(apiData.tiers_aggregated || [], visiblePoints);
     const [apiError, setApiError] = useState(false);
 
     useEffect(() => {
@@ -22,8 +22,9 @@ function App() {
         Promise.race([fetch(apiUrl), fetchTimeout])
             .then(response => response.json())
             .then(fetchedData => {
+                console.log(fetchedData);
                 if (fetchedData.success === true) {
-                    setRawData(fetchedData.result || []);
+                    setApiData(fetchedData);
                 } else {
                     setApiError(true);
                 }
@@ -61,7 +62,7 @@ function App() {
                 {apiError &&
                     <ErrorBanner />
                 }
-                <ChartComponent data={transformedData} visiblePoints={visiblePoints} />
+                <ChartComponent data={tiersAggregatedData} visiblePoints={visiblePoints} />
             </Container>
         </Box>
     );
