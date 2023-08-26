@@ -7,7 +7,10 @@ function TiersChart({ data }) {
         "#1f77b4", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728",
         "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#aaffc3"
     ];
-    const lastData = data?.filter(item => item.block_height === 17995140) || [];
+    const lastBlockHeight = data ? data[data.length - 1]?.block_height : 0;
+    const lastData = data?.filter(item => item.block_height === lastBlockHeight) || [];
+    console.log("lastData", lastData);
+
     const activeTiers = {};
     lastData.forEach(element => {
         const tierName = element?.tier_name || undefined;
@@ -18,6 +21,7 @@ function TiersChart({ data }) {
         }
         activeTiers[tierName][tierValue] = parseInt(element.value);
     });
+    console.log("activeTiers", activeTiers);
     const barData = Object.keys(activeTiers).map((tierName, index) => {
         const tierValues = activeTiers[tierName];
         const barEntry = { name: tierName };

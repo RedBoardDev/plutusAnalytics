@@ -5,7 +5,6 @@ import './LastStats.css';
 function LastStats({ data }) {
     const lastDayStats = data[data.length - 1] || {};
     const last2DayStats = data[data.length - 2] || {};
-
     const differences = {};
     Object.keys(lastDayStats).forEach(key => {
         if (key !== 'signed_at' && key !== 'block_height') {
