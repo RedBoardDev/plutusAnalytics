@@ -25,7 +25,12 @@ function StackedChart({ data }) {
                             <Tooltip
                                 formatter={(value, name, props) => [`${value.toLocaleString()} PLU`]}
                             />
-                            <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d8" />
+                            <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d8" yAxisId="nonZeroStart" />
+                            <YAxis
+                                yAxisId="nonZeroStart"
+                                domain={['dataMin', 'dataMax']}
+                                tickFormatter={value => value.toLocaleString()}
+                            />
                         </AreaChart>
                     </Box>
                 </Box>
@@ -33,7 +38,5 @@ function StackedChart({ data }) {
         </Box>
     );
 }
-
-
 
 export default StackedChart;

@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Brush } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Brush, ReferenceLine, Label } from 'recharts';
 import CustomLegend from './CustomLegend';
 
 function ChartComponent({ data }) {
     const [activeTiers, setActiveTiers] = useState([
         "HERO", "VETERAN", "LEGEND", "GOAT", "RESEARCHER", "EXPLORER", "ADVENTURER"
     ]);
+
+    const dateExplanations = {
+        "01/07/2023": "1er difficulty\nadjustement",
+        "07/08/2023": "Announce new\nreward plan",
+    };
+
+    const tierColors = {
+        HERO: "#ff7300",
+        VETERAN: "#387908",
+        LEGEND: "#f51167",
+        GOAT: "#0012f4",
+        RESEARCHER: "#650d1b",
+        EXPLORER: "#0d656e",
+        ADVENTURER: "#6e0d44",
+    };
 
     return (
         <Box mt={3}>
@@ -27,13 +42,42 @@ function ChartComponent({ data }) {
                             <YAxis />
                             <Tooltip />
                             <CartesianGrid stroke="#aaa" strokeDasharray="3 3" />
-                            {activeTiers.includes("HERO") && <Line type="monotone" dataKey="HERO" stroke="#ff7300" />}
-                            {activeTiers.includes("VETERAN") && <Line type="monotone" dataKey="VETERAN" stroke="#387908" />}
-                            {activeTiers.includes("LEGEND") && <Line type="monotone" dataKey="LEGEND" stroke="#f51167" />}
-                            {activeTiers.includes("GOAT") && <Line type="monotone" dataKey="GOAT" stroke="#0012f4" />}
-                            {activeTiers.includes("RESEARCHER") && <Line type="monotone" dataKey="RESEARCHER" stroke="#650d1b" />}
-                            {activeTiers.includes("EXPLORER") && <Line type="monotone" dataKey="EXPLORER" stroke="#0d656e" />}
-                            {activeTiers.includes("ADVENTURER") && <Line type="monotone" dataKey="ADVENTURER" stroke="#6e0d44" />}
+                            {activeTiers.map(tier => (
+                                activeTiers.includes(tier) && (
+                                    <Line
+                                        key={tier}
+                                        dot={false}
+                                        type="monotone"
+                                        dataKey={tier}
+                                        stroke={tierColors[tier]}
+                                    />
+                                )
+                            ))}
+                            {Object.keys(dateExplanations).map(date => {
+                                const explanation = dateExplanations[date];
+                                const explanationLines = explanation.split('\n');
+                                return (
+                                    <ReferenceLine
+                                        key={date}
+                                        x={date}
+                                        stroke="#003366"
+                                        strokeDasharray="3 3"
+                                        strokeWidth={2}
+                                    >
+                                        {explanationLines.map((line, index) => (
+                                            <Label
+                                                key={index}
+                                                value={line}
+                                                position="insideTopLeft"
+                                                fill="#001633"
+                                                fontSize={14}
+                                                offset={10}
+                                                dy={20 * index}
+                                            />
+                                        ))}
+                                    </ReferenceLine>
+                                );
+                            })}
                             <Brush
                                 dataKey="signed_at"
                                 height={40}
