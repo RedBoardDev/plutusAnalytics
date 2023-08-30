@@ -6,7 +6,6 @@ import './statsComparator.css';
 function StatsComparator({ data }) {
     const [todayDate, setTodayDate] = useState(null);
     const [yesterdayDate, setYesterdayDate] = useState(null);
-    const [todayStats, setTodayStats] = useState({});
     const [differences, setDifferences] = useState({});
 
     useEffect(() => {
@@ -23,13 +22,14 @@ function StatsComparator({ data }) {
         });
         setDifferences(newDifferences);
 
-        setTodayStats(newTodayStats);
     }, [data, yesterdayDate, todayDate])
 
     const handleDateRangeChange = (newtodayDate, newyesterdayDate) => {
         setTodayDate(newtodayDate);
         setYesterdayDate(newyesterdayDate);
     };
+
+    const desiredOrder = ["RESEARCHER", "EXPLORER", "ADVENTURER", "HERO", "VETERAN", "LEGEND", "GOAT"];
 
     return (
         <Box mt={3} width={250}>
@@ -39,7 +39,7 @@ function StatsComparator({ data }) {
                         Stats Comparator
                     </Typography>
                     <Box mt={2}>
-                        {Object.keys(todayStats).map(key => {
+                        {desiredOrder.map(key => {
                             if (key !== 'signed_at' && key !== 'block_height') {
                                 const difference = differences[key];
                                 const textClass = difference > 0 ? 'green-text' : difference < 0 ? 'red-text' : '';
