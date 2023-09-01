@@ -70,7 +70,7 @@ function App() {
                         fontWeight: 'bold',
                         letterSpacing: '1px'
                     }}>
-                    Plutus tiers chart
+                    Plutus analytics
                 </Typography>
                 <ChartComponent data={tiersAggregatedData} visiblePoints={visiblePoints} />
                 <StackedChart data={stakingData} />
