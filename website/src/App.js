@@ -6,6 +6,8 @@ import ErrorBanner from './components/ErrorBanner';
 import StatsComparator from './components/StatsComparator';
 import TiersChart from './components/TiersChart';
 import StackedChart from './components/StackedChart';
+import WithdrawWidget from './components/WithdrawWidget';
+import PriceWidget from './components/PriceWidget';
 import './App.css';
 
 function App() {
@@ -72,14 +74,22 @@ function App() {
                     }}>
                     Plutus analytics
                 </Typography>
+
+                <Box mt={0} display="center" justifyContent="center">
+                    <WithdrawWidget />
+                    <Box ml={3} />
+                    <PriceWidget />
+                </Box>
+
                 <ChartComponent data={tiersAggregatedData} visiblePoints={visiblePoints} />
                 <StackedChart data={stakingData} />
+
                 <Box mt={0} display="flex">
                     <StatsComparator data={tiersAggregatedData} />
                     <TiersChart style={{ flex: 1 }} data={apiData.tiers} />
                 </Box>
-            </Container>
-        </Box>
+            </Container >
+        </Box >
     );
 }
 
