@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const port = 60839;
 
 let updateData = {
@@ -7,6 +8,8 @@ let updateData = {
     price: null,
     incidents: null
 }
+
+app.use(cors());
 
 async function fetchGetter(url) {
     try {
