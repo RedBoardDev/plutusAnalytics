@@ -65,7 +65,6 @@ async function getCurrencyData() {
                 name: data.name,
                 image: data.image,
             };
-            console.log(updateData.currency)
         } else {
             console.log(`No data found for getCurrencyData`);
         }
@@ -117,7 +116,7 @@ app.get('/currency', (req, res) => {
         res.status(404).send({ 'status': 'fail', 'message': 'Currency not found.' });
         return;
     }
-    res.status(200).send({ 'status': 'success', 'Currency data': updateData.currency });
+    res.status(200).send({ 'status': 'success', 'data': updateData.currency });
 })
 
 app.get('/incidents', (req, res) => {
