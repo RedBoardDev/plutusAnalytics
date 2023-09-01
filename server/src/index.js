@@ -5,7 +5,7 @@ const port = 60839;
 
 let updateData = {
     lasOutgoingtTx: null,
-    price: null,
+    currency: null,
     incidents: null
 }
 
@@ -52,15 +52,22 @@ async function getLastOutgoingTokenTransaction() {
     }
 }
 
-async function getCurrencyPrice() {
+async function getCurrencyData() {
     try {
         const apiUrl = `https://api.coingecko.com/api/v3/coins/pluton`;
         const data = await fetchGetter(apiUrl);
 
         if (data) {
-            updateData.price = data.market_data.current_price;
+            updateData.currency = {
+                price: data.market_data.current_price,
+                price_change_percentage_24h: data.market_data.price_change_percentage_24h,
+                image: data.image,
+                name: data.name,
+                image: data.image,
+            };
+            console.log(updateData.currency)
         } else {
-            console.log(`No data found for getLastCurrencyPrice`);
+            console.log(`No data found for getCurrencyData`);
         }
     } catch (error) {
         console.error('Error:', error.message);
@@ -86,8 +93,8 @@ async function getIncidents() {
 setInterval(getLastOutgoingTokenTransaction, 60000 * 5);
 getLastOutgoingTokenTransaction();
 
-setInterval(getCurrencyPrice, 60000 * 1);
-getCurrencyPrice();
+setInterval(getCurrencyData, 60000 * 1);
+getCurrencyData();
 
 setInterval(getIncidents, 60000 * 5);
 getIncidents();
@@ -105,12 +112,12 @@ app.get('/lastwithdraw', (req, res) => {
     res.status(200).send({ 'status': 'success', 'lasOutgoingtTx': updateData.lasOutgoingtTx });
 })
 
-app.get('/price', (req, res) => {
-    if (!updateData.price) {
-        res.status(404).send({ 'status': 'fail', 'message': 'Price not found.' });
+app.get('/currency', (req, res) => {
+    if (!updateData.currency) {
+        res.status(404).send({ 'status': 'fail', 'message': 'Currency not found.' });
         return;
     }
-    res.status(200).send({ 'status': 'success', 'price': updateData.price });
+    res.status(200).send({ 'status': 'success', 'Currency data': updateData.currency });
 })
 
 app.get('/incidents', (req, res) => {
