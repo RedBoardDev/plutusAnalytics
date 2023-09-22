@@ -15,12 +15,12 @@ function ChartComponent({ data }) {
 
     const tierColors = {
         HERO: "#ff7300",
-        VETERAN: "#387908",
+        VETERAN: "#245e35",
         LEGEND: "#f51167",
         GOAT: "#0012f4",
         RESEARCHER: "#650d1b",
-        EXPLORER: "#0d656e",
-        ADVENTURER: "#6e0d44",
+        EXPLORER: "#1d808a",
+        ADVENTURER: "#b0b32e"
     };
 
     return (
@@ -30,7 +30,7 @@ function ChartComponent({ data }) {
                     <Typography variant='h6' align="center" gutterBottom>
                         Staking Tiers
                     </Typography>
-                    <CustomLegend activeTiers={activeTiers} setActiveTiers={setActiveTiers} />
+                    <CustomLegend activeTiers={activeTiers} setActiveTiers={setActiveTiers} tiersColors={tierColors} />
                     <Box mt={4} display="flex" justifyContent="center">
                         <LineChart
                             width={900}

@@ -2,16 +2,7 @@ import { Box, Typography, IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-function CustomLegend({ activeTiers, setActiveTiers }) {
-    const tierColors = {
-        HERO: "#ff7300",
-        VETERAN: "#387908",
-        LEGEND: "#f51167",
-        GOAT: "#0012f4",
-        RESEARCHER: "#650d1b",
-        EXPLORER: "#0d656e",
-        ADVENTURER: "#6e0d44"
-    };
+function CustomLegend({ activeTiers, setActiveTiers, tiersColors }) {
 
     const handleLegendClick = (tier) => {
         if (activeTiers.includes(tier)) {
@@ -23,12 +14,12 @@ function CustomLegend({ activeTiers, setActiveTiers }) {
 
     return (
         <Box display="flex" justifyContent="center" flexWrap="wrap" gap={2}>
-            {Object.keys(tierColors).map(tier => (
+            {Object.keys(tiersColors).map(tier => (
                 <Box key={tier} display="flex" alignItems="center">
                     <IconButton size="small" onClick={() => handleLegendClick(tier)}>
                         {activeTiers.includes(tier) ? <VisibilityIcon fontSize="small" /> : <VisibilityOffIcon fontSize="small" />}
                     </IconButton>
-                    <Typography variant="body2" style={{ color: activeTiers.includes(tier) ? tierColors[tier] : '#ccc' }}>
+                    <Typography variant="body2" style={{ color: activeTiers.includes(tier) ? tiersColors[tier] : '#ccc' }}>
                         {tier}
                     </Typography>
                 </Box>
