@@ -8,6 +8,13 @@ function ChartComponent({ data }) {
         "HERO", "VETERAN", "LEGEND", "GOAT", "RESEARCHER", "EXPLORER", "ADVENTURER"
     ]);
 
+    const maxValue = Math.max(
+        ...data.map(item => {
+            const values = activeTiers.map(tier => Number(item[tier]) || 0);
+            return Math.max(...values);
+        })
+    );
+
     const dateExplanations = {
         "01/07/2023": "1er difficulty\nadjustement",
         "07/08/2023": "Announce new\nreward plan",
@@ -39,7 +46,8 @@ function ChartComponent({ data }) {
                             margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
                         >
                             <XAxis dataKey="signed_at" />
-                            <YAxis />
+                            <YAxis domain={[0, maxValue]} />
+
                             <Tooltip />
                             <CartesianGrid stroke="#aaa" strokeDasharray="3 3" />
                             {activeTiers.map(tier => (
