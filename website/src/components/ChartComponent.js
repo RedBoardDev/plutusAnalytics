@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Brush, ReferenceLine, Label } from 'recharts';
+import FullscreenChartButton from './FullscreenChartButton';
 import CustomLegend from './CustomLegend';
+import ChartComponentFullscreen from './ChartComponentFullscreen';
 
 function ChartComponent({ data }) {
     const [activeTiers, setActiveTiers] = useState([
@@ -30,10 +32,17 @@ function ChartComponent({ data }) {
         ADVENTURER: "#b0b32e"
     };
 
+    const [isFullScreen, setIsFullScreen] = useState(false);
+
+    const toggleFullScreen = () => {
+        setIsFullScreen(!isFullScreen);
+    };
+
     return (
         <Box mt={3}>
             <Paper elevation={5} style={{ background: '#f5f5f5' }}>
                 <Box p={3}>
+                    <FullscreenChartButton onClick={toggleFullScreen} />
                     <Typography variant='h6' align="center" gutterBottom>
                         Staking Tiers
                     </Typography>
@@ -103,6 +112,9 @@ function ChartComponent({ data }) {
                     </Box>
                 </Box>
             </Paper>
+            {isFullScreen ? (
+                <ChartComponentFullscreen data={data} />
+            ) : null}
         </Box>
     );
 }
