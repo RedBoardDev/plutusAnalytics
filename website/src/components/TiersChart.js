@@ -31,7 +31,7 @@ function TiersChart({ data }) {
 
     return (
         <Box p={3}>
-            <Paper elevation={5} style={{ background: '#f5f5f5' }}>
+            <Paper elevation={5} style={{ background: '#f0f0f0' }}>
                 <Box p={3}>
                     <Typography variant='h6' align="center" gutterBottom>
                         Staking per dynamic ajustement

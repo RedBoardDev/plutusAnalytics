@@ -23,7 +23,7 @@ function WithdrawWidget() {
 
     return (
         <Box mt={3}>
-            <Paper elevation={5} style={{ background: '#f5f5f5', padding: '20px', textAlign: 'center', borderRadius: '10px', height: '110px' }}>
+            <Paper elevation={5} style={{ background: '#f0f0f0', padding: '20px', textAlign: 'center', borderRadius: '10px', height: '110px' }}>
                 {withdrawData ? (
                     <div>
                         <Typography variant="h6" style={{ marginBottom: '10px', fontWeight: 'bold', color: '#333' }}>

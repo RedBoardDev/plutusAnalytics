@@ -8,6 +8,7 @@ import TiersChart from './components/TiersChart';
 import StackedChart from './components/StackedChart';
 import WithdrawWidget from './components/WithdrawWidget';
 import PriceWidget from './components/PriceWidget';
+import DonationWidget from './components/DonationWidget';
 import './App.css';
 
 function App() {
@@ -54,7 +55,7 @@ function App() {
             justifyContent="center"
             alignItems="center"
             minHeight="100vh"
-            bgcolor="#f4f6f8"
+            bgcolor="#e3e6e8"
         >
             {apiError &&
                 <ErrorBanner />
@@ -65,16 +66,16 @@ function App() {
                     gutterBottom
                     align="center"
                     style={{
-                        padding: '2rem 0',
+                        padding: '2rem 0 1rem',
                         textShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)',
-                        fontSize: '2.5rem',
+                        fontSize: '3.0rem',
                         color: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
                         fontWeight: 'bold',
                         letterSpacing: '1px'
                     }}>
                     Plutus analytics
                 </Typography>
-
+                {/* <DonationWidget /> */}
                 <Box mt={0} display="center" justifyContent="center">
                     <WithdrawWidget />
                     <Box ml={3} />

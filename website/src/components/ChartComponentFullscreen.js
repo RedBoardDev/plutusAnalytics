@@ -62,7 +62,7 @@ function ChartComponentFullscreen({ data }) {
         <Box mt={3}>
             <Dialog open={isChartOpen} onClose={closeChartPopup} fullScreen>
                 <FullscreenChartButton onClick={closeChartPopup} />
-                <DialogContent style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <DialogContent style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#f0f0f0' }}>
                     <Typography variant='h6' align="center" gutterBottom>
                         Staking Tiers
                     </Typography>

@@ -7,9 +7,13 @@ function FullScreenChartButton({ onClick }) {
         fontSize: '28px',
     };
 
+    const buttonStyle = {
+        position: 'absolute',
+    };
+
     return (
-        <div>
-            <IconButton onClick={onClick}>
+        <div style={{ position: 'relative' }}>
+            <IconButton onClick={onClick} style={buttonStyle}>
                 <FullscreenIcon style={iconStyle} />
             </IconButton>
         </div>

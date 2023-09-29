@@ -16,7 +16,7 @@ function PriceWidget() {
 
     return (
         <Box mt={3}>
-            <Paper elevation={5} style={{ background: '#f5f5f5', padding: '20px', textAlign: 'center', borderRadius: '10px', height: '110px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <Paper elevation={5} style={{ background: '#f0f0f0', padding: '20px', textAlign: 'center', borderRadius: '10px', height: '110px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 {currencyData ? (
                     <>
                         <Box sx={{ display: "flex", alignItems: "center", marginLeft: "10px", marginBottom: "0.8rem", justifyContent: "center" }}>
