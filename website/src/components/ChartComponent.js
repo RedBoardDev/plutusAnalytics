@@ -20,6 +20,7 @@ function ChartComponent({ data }) {
     const dateExplanations = {
         "01/07/2023": "1er difficulty\nadjustement",
         "07/08/2023": "Announce new\nreward plan",
+        "01/10/2023": "2eme difficulty\nadjustement",
     };
 
     const tierColors = {

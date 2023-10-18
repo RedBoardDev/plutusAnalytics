@@ -2,6 +2,23 @@ import React from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
+const CustomRectangle = (props) => {
+    const { x, y, width, height, fill } = props;
+
+    return (
+        <rect
+            x={x}
+            y={y}
+            width={width}
+            height={height}
+            fill={fill}
+            stroke={fill}
+            strokeWidth={2}
+            fillOpacity={0.8}
+        />
+    );
+};
+
 function TiersChart({ data }) {
     const colors = [
         "#1f77b4", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728",
@@ -23,12 +40,15 @@ function TiersChart({ data }) {
     const barData = Object.keys(activeTiers).map((tierName, index) => {
         const tierValues = activeTiers[tierName];
         const barEntry = { name: tierName };
+        let total = 0;
         Object.keys(tierValues).forEach((tierValue, idx) => {
             barEntry[`DA ${idx}`] = tierValues[tierValue];
+            total += tierValues[tierValue];
         });
+        barEntry['total'] = total;
         return barEntry;
     });
-
+    const sortedBarData = barData.sort((a, b) => a.total - b.total);
     return (
         <Box p={3}>
             <Paper elevation={5} style={{ background: '#f0f0f0' }}>
@@ -40,7 +60,7 @@ function TiersChart({ data }) {
                         <BarChart
                             width={800}
                             height={370}
-                            data={barData}
+                            data={sortedBarData}
                         >
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" />
@@ -63,22 +83,5 @@ function TiersChart({ data }) {
         </Box>
     );
 }
-
-const CustomRectangle = (props) => {
-    const { x, y, width, height, fill } = props;
-
-    return (
-        <rect
-            x={x}
-            y={y}
-            width={width}
-            height={height}
-            fill={fill}
-            stroke={fill}
-            strokeWidth={2}
-            fillOpacity={0.8}
-        />
-    );
-};
 
 export default TiersChart;
