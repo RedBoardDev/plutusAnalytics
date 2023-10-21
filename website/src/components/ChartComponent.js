@@ -7,9 +7,8 @@ import ChartComponentFullscreen from './ChartComponentFullscreen';
 
 function ChartComponent({ data }) {
     const [activeTiers, setActiveTiers] = useState([
-        "HERO", "VETERAN", "LEGEND", "GOAT", "RESEARCHER", "EXPLORER", "ADVENTURER"
+        "HERO", "VETERAN", "LEGEND", "MYTH", "GOAT", "HONEY"
     ]);
-
     const maxValue = Math.max(
         ...data.map(item => {
             const values = activeTiers.map(tier => Number(item[tier]) || 0);
@@ -21,16 +20,16 @@ function ChartComponent({ data }) {
         "01/07/2023": "1er difficulty\nadjustement",
         "07/08/2023": "Announce new\nreward plan",
         "01/10/2023": "2eme difficulty\nadjustement",
+        "20/10/2023": "Remove difficulty\nadjustement",
     };
 
     const tierColors = {
         HERO: "#ff7300",
         VETERAN: "#245e35",
         LEGEND: "#f51167",
+        MYTH: "#650d1b",
         GOAT: "#0012f4",
-        RESEARCHER: "#650d1b",
-        EXPLORER: "#1d808a",
-        ADVENTURER: "#b0b32e"
+        HONEY: "#1d808a"
     };
 
     const [isFullScreen, setIsFullScreen] = useState(false);

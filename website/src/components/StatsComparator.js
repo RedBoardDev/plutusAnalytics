@@ -29,7 +29,7 @@ function StatsComparator({ data }) {
         setYesterdayDate(newyesterdayDate);
     };
 
-    const desiredOrder = ["RESEARCHER", "EXPLORER", "ADVENTURER", "HERO", "VETERAN", "LEGEND", "GOAT"];
+    const desiredOrder = ["HERO", "VETERAN", "LEGEND", "MYTH", "GOAT", "HONEY"];
 
     return (
         <Box mt={3} width={250}>
