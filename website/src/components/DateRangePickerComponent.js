@@ -42,6 +42,7 @@ function DateRangePickerComponent({ onDateRangeChange, availableDates }) {
                 <div style={{ marginBottom: '1vh' }}>
                     <DatePicker
                         label="Start Date"
+                        format="DD/MM/YYYY"
                         value={startDate}
                         onChange={handleStartDateChange}
                         shouldDisableDate={shouldDisableDate}
@@ -51,6 +52,7 @@ function DateRangePickerComponent({ onDateRangeChange, availableDates }) {
                 <div>
                     <DatePicker
                         label="End Date"
+                        format="DD/MM/YYYY"
                         value={endDate}
                         onChange={handleEndDateChange}
                         shouldDisableDate={shouldDisableDate}
