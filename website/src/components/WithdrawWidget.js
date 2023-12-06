@@ -27,7 +27,7 @@ function WithdrawWidget() {
                 {withdrawData ? (
                     <div>
                         <Typography variant="h6" style={{ marginBottom: '10px', fontWeight: 'bold', color: '#333' }}>
-                            Last Withdraw
+                            Last top-up
                         </Typography>
                         <Typography variant="body1" style={{ fontSize: '18px', marginBottom: '15px' }}>
                             Date: {formatDate(withdrawData.timeStamp)}
