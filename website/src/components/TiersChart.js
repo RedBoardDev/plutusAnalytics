@@ -51,7 +51,7 @@ function TiersChart({ data }) {
                 barLabels.push(tierName2);
             }
 
-            barEntry[tierName2] = tierValues[tierName2];
+            // barEntry[tierName2] = tierValues[tierName2];
             total += tierValues[tierName2];
         });
         barEntry['total'] = total;
@@ -59,7 +59,7 @@ function TiersChart({ data }) {
     });
 
     const sortedBarData = barData.sort((a, b) => a.total - b.total);
-
+    console.log(barLabels, sortedBarData);
     return (
         <Box p={3}>
             <Paper elevation={5} style={{ background: '#f0f0f0' }}>
@@ -78,15 +78,13 @@ function TiersChart({ data }) {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            {barLabels.map((tierName, index) => (
                                 <Bar
-                                    key={tierName}
-                                    dataKey={tierName}
+                                    key={'total'}
+                                    dataKey={'total'}
                                     stackId="a"
-                                    fill={colors[index % colors.length]}
+                                    fill={colors[0 % colors.length]}
                                     shape={<CustomRectangle />}
                                 />
-                            ))}
                         </BarChart>
                     </Box>
                 </Box>
