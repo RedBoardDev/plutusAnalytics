@@ -28,7 +28,7 @@ function PriceWidget() {
                                 />
                             </Box>
                             <Box sx={{ display: "flex", flexDirection: "column", marginLeft: "10px" }}>
-                                <Typography variant="h6" fontWeight="bold">
+                                <Typography variant="h5" fontWeight="bold">
                                     {currencyData.name}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
@@ -53,6 +53,7 @@ function PriceWidget() {
                                             : "rgba(0, 0, 0, 0.1)",
                                     borderRadius: "8px",
                                     padding: "0.2rem 0.5rem",
+                                    marginTop: '-5px',
                                     boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.1)",
                                 }}
                             >

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box } from '@mui/material';
-import ChartComponent from './components/ChartComponent';
+import StakingTiers from './components/StakingTiers';
 import useTransformedData from './components/useTransformedData';
 import ErrorBanner from './components/ErrorBanner';
 import StatsComparator from './components/StatsComparator';
-import TiersChart from './components/TiersChart';
-import StackedChart from './components/StackedChart';
+import StakingBarChart from './components/StakingBarChart';
+import StakingEvolution from './components/StakingEvolution';
 import WithdrawWidget from './components/WithdrawWidget';
 import PriceWidget from './components/PriceWidget';
 import DonationWidget from './components/DonationWidget';
 import './App.css';
+import RedeemChart from './components/RedeemChart';
 
 function App() {
     const [visiblePoints] = useState(14);
@@ -82,13 +83,14 @@ function App() {
                     <PriceWidget />
                 </Box>
 
-                <ChartComponent data={tiersAggregatedData} visiblePoints={visiblePoints} />
-                <StackedChart data={stakingData} />
+                <StakingTiers data={tiersAggregatedData} visiblePoints={visiblePoints} />
+                <StakingEvolution data={stakingData} />
 
                 <Box mt={0} display="flex">
                     <StatsComparator data={tiersAggregatedData} />
-                    <TiersChart style={{ flex: 1 }} data={apiData.tiers} />
+                    <StakingBarChart style={{ flex: 1 }} data={apiData.tiers} />
                 </Box>
+                <RedeemChart data={apiData.redeem ?? []} />
             </Container >
         </Box >
     );

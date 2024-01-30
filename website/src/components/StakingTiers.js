@@ -5,7 +5,7 @@ import FullscreenChartButton from './FullscreenChartButton';
 import CustomLegend from './CustomLegend';
 import ChartComponentFullscreen from './ChartComponentFullscreen';
 
-function ChartComponent({ data }) {
+function StakingTiers({ data }) {
     const [activeTiers, setActiveTiers] = useState([
         "HERO", "VETERAN", "LEGEND", "MYTH", "GOAT", "HONEY"
     ]);
@@ -119,4 +119,4 @@ function ChartComponent({ data }) {
     );
 }
 
-export default ChartComponent;
+export default StakingTiers;

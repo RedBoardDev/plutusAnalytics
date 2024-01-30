@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Paper, Typography } from '@mui/material';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
-function StackedChart({ data }) {
+function StakingEvolution({ data }) {
     return (
         <Box mt={3}>
             <Paper elevation={5} style={{ background: '#f0f0f0' }}>
@@ -39,4 +39,4 @@ function StackedChart({ data }) {
     );
 }
 
-export default StackedChart;
+export default StakingEvolution;

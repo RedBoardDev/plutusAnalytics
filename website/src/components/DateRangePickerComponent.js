@@ -46,7 +46,7 @@ function DateRangePickerComponent({ onDateRangeChange, availableDates }) {
                         value={startDate}
                         onChange={handleStartDateChange}
                         shouldDisableDate={shouldDisableDate}
-                        renderInput={(props) => <input {...props} />}
+                        input={(props) => <input {...props} />}
                     />
                 </div>
                 <div>
@@ -56,7 +56,7 @@ function DateRangePickerComponent({ onDateRangeChange, availableDates }) {
                         value={endDate}
                         onChange={handleEndDateChange}
                         shouldDisableDate={shouldDisableDate}
-                        renderInput={(props) => <input {...props} />}
+                        input={(props) => <input {...props} />}
                     />
                 </div>
             </LocalizationProvider>

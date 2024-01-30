@@ -19,7 +19,7 @@ const CustomRectangle = (props) => {
     );
 };
 
-function TiersChart({ data }) {
+function StakingBarChart({ data }) {
     const colors = [
         "#1f77b4", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728",
         "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#aaffc3"
@@ -51,7 +51,6 @@ function TiersChart({ data }) {
                 barLabels.push(tierName2);
             }
 
-            // barEntry[tierName2] = tierValues[tierName2];
             total += tierValues[tierName2];
         });
         barEntry['total'] = total;
@@ -59,7 +58,6 @@ function TiersChart({ data }) {
     });
 
     const sortedBarData = barData.sort((a, b) => a.total - b.total);
-    console.log(barLabels, sortedBarData);
     return (
         <Box p={3}>
             <Paper elevation={5} style={{ background: '#f0f0f0' }}>
@@ -93,4 +91,4 @@ function TiersChart({ data }) {
     );
 }
 
-export default TiersChart;
+export default StakingBarChart;

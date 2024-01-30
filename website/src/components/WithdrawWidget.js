@@ -26,11 +26,11 @@ function WithdrawWidget() {
             <Paper elevation={5} style={{ background: '#f0f0f0', padding: '20px', textAlign: 'center', borderRadius: '10px', height: '110px' }}>
                 {withdrawData ? (
                     <div>
-                        <Typography variant="h6" style={{ marginBottom: '10px', fontWeight: 'bold', color: '#333' }}>
+                        <Typography variant="h5" style={{ marginBottom: '15px', fontWeight: 'bold', color: '#333' }}>
                             Last top-up
                         </Typography>
-                        <Typography variant="body1" style={{ fontSize: '18px', marginBottom: '15px' }}>
-                            Date: {formatDate(withdrawData.timeStamp)}
+                        <Typography variant="body1" style={{ fontSize: '18px', marginBottom: '10px' }}>
+                            {formatDate(withdrawData.timeStamp)}
                         </Typography>
                         <Typography variant="body1" style={{ fontSize: '18px' }}>
                             Amount: {formatValue(withdrawData.value, withdrawData.tokenDecimal)}
