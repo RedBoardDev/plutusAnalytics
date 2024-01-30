@@ -57,7 +57,16 @@ function StakingBarChart({ data }) {
         return barEntry;
     });
 
-    const sortedBarData = barData.sort((a, b) => a.total - b.total);
+    const desiredOrder = ["HERO", "VETERAN", "LEGEND", "MYTH", "GOAT", "HONEY"];
+
+    const sortedBarData = barData.sort((a, b) => {
+        const indexA = desiredOrder.indexOf(a.name);
+        const indexB = desiredOrder.indexOf(b.name);
+
+        return (indexA === -1 ? Infinity : indexA) - (indexB === -1 ? Infinity : indexB);
+    });
+
+
     return (
         <Box p={3}>
             <Paper elevation={5} style={{ background: '#f0f0f0' }}>
@@ -76,13 +85,13 @@ function StakingBarChart({ data }) {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                                <Bar
-                                    key={'total'}
-                                    dataKey={'total'}
-                                    stackId="a"
-                                    fill={colors[0 % colors.length]}
-                                    shape={<CustomRectangle />}
-                                />
+                            <Bar
+                                key={'total'}
+                                dataKey={'total'}
+                                stackId="a"
+                                fill={colors[0 % colors.length]}
+                                shape={<CustomRectangle />}
+                            />
                         </BarChart>
                     </Box>
                 </Box>
