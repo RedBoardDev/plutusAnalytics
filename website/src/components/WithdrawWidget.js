@@ -8,7 +8,7 @@ function WithdrawWidget() {
         fetch('https://plutus.thomasott.fr/api/lastwithdraw')
             .then(response => response.json())
             .then(data => setWithdrawData(data.lasOutgoingtTx))
-            .catch(error => console.error('Erreur lors de la requête API:', error));
+            .catch(error => console.error('Error during API request:', error));
     }, []);
 
     const formatDate = (timestamp) => {
@@ -37,7 +37,7 @@ function WithdrawWidget() {
                         </Typography>
                     </div>
                 ) : (
-                    <Typography variant="body1">Chargement des données...</Typography>
+                    <Typography variant="body1">Loading...</Typography>
                 )}
             </Paper>
         </Box>

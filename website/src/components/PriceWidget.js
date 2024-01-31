@@ -11,7 +11,7 @@ function PriceWidget() {
         fetch('https://plutus.thomasott.fr/api/currency')
             .then(response => response.json())
             .then(data => setCurrencyData(data.data))
-            .catch(error => console.error('Erreur lors de la requête API:', error));
+            .catch(error => console.error('Error during API request:', error));
     }, []);
 
     return (
@@ -81,7 +81,7 @@ function PriceWidget() {
                         </Box>
                     </>
                 ) : (
-                    <Typography variant="body1">Chargement des données...</Typography>
+                    <Typography variant="body1">Loading...</Typography>
                 )}
             </Paper>
         </Box>

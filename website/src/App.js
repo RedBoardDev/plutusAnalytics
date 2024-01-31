@@ -11,6 +11,7 @@ import PriceWidget from './components/PriceWidget';
 import DonationWidget from './components/DonationWidget';
 import './App.css';
 import RedeemChart from './components/RedeemChart';
+import BalanceTracker from './components/BalanceTracker';
 
 function App() {
     const [visiblePoints] = useState(14);
@@ -82,6 +83,8 @@ function App() {
                     <Box ml={3} />
                     <PriceWidget />
                 </Box>
+
+                <BalanceTracker data={apiData.wallet} />
 
                 <StakingTiers data={tiersAggregatedData} visiblePoints={visiblePoints} />
                 <StakingEvolution data={stakingData} />
