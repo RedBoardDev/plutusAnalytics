@@ -17,7 +17,7 @@ function WithdrawWidget() {
     };
 
     const formatValue = (value, decimal) => {
-        const formattedValue = (value / 10 ** decimal).toFixed(2);
+        const formattedValue = (value / 10 ** decimal).toLocaleString({ minimumFractionDigits: 2 });
         return `${formattedValue} ${withdrawData.tokenSymbol}`;
     };
 

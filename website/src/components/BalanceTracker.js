@@ -12,13 +12,13 @@ function BalanceTracker({ data }) {
     return (
         <Box mt={3} display="flex" justifyContent="center">
             {data.map((element, index) => (
-                <Paper elevation={5} style={{ background: '#f0f0f0', padding: '20px', textAlign: 'center', borderRadius: '10px', width: '300px', marginLeft: '10px' }}>
-                    <div key={index}>
+                <Paper elevation={5} style={{ background: '#f0f0f0', padding: '20px', textAlign: 'center', borderRadius: '10px', width: '300px', marginLeft: '10px' }} key={index}>
+                    <div>
                         <Typography variant="h6" style={{ marginBottom: '15px', fontWeight: 'bold', color: '#333' }}>
                             {element.name}
                         </Typography>
                         <Typography variant="body1" style={{ fontSize: '18px' }}>
-                            {element.value.toFixed(2)} PLU
+                            {element.value.toLocaleString({ minimumFractionDigits: 2 })} PLU
                         </Typography>
                     </div>
                 </Paper>
